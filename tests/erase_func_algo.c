@@ -72,7 +72,7 @@ static int read_chip(struct flashctx *flash, uint8_t *buf, unsigned int start, u
 	if (start < MOCK_CHIP_SIZE)
 		LOG_READ_WRITE_FUNC;
 
-	assert_in_range(start + len, 0, MIN_REAL_CHIP_SIZE);
+	assert_int_in_range(start + len, 0, MIN_REAL_CHIP_SIZE);
 
 	memcpy(buf, &g_state.buf[start], len);
 
@@ -94,7 +94,7 @@ static int write_chip(struct flashctx *flash, const uint8_t *buf, unsigned int s
 	if (start < MOCK_CHIP_SIZE)
 		LOG_READ_WRITE_FUNC;
 
-	assert_in_range(start + len, 0, MIN_REAL_CHIP_SIZE);
+	assert_int_in_range(start + len, 0, MIN_REAL_CHIP_SIZE);
 
 	memcpy(&g_state.buf[start], buf, len);
 
@@ -120,7 +120,7 @@ static int block_erase_chip_tagged(struct flashctx *flash, enum block_erase_func
 		g_state.eraseblocks_actual_ind++;
 	}
 
-	assert_in_range(blockaddr + blocklen, 0, MIN_REAL_CHIP_SIZE);
+	assert_int_in_range(blockaddr + blocklen, 0, MIN_REAL_CHIP_SIZE);
 
 	memset(&g_state.buf[blockaddr], ERASE_VALUE, blocklen);
 
@@ -1440,7 +1440,7 @@ static int block_erase_chip_with_protected_region(struct flashctx *flash, enum b
 		g_state.eraseblocks_actual_ind++;
 	}
 
-	assert_in_range(blockaddr + blocklen, 0, MIN_REAL_CHIP_SIZE);
+	assert_int_in_range(blockaddr + blocklen, 0, MIN_REAL_CHIP_SIZE);
 
 	// Check we are not trying to erase protected region. This should not happen,
 	// because the logic should handle protected regions and never invoke erasefn

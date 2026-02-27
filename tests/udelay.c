@@ -61,5 +61,5 @@ void udelay_test_short(void **state) {
     default_delay(delay_us);
     uint64_t elapsed = now_us() - start;
 
-    assert_in_range(elapsed, delay_us, 10 * delay_us);
+    assert_int_in_range(elapsed, delay_us, 10 * delay_us);
 }
